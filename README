@@ -1,0 +1,70 @@
+# 📝 Todo Golang API
+
+Simple Todo backend application using Go + Gin + PostgreSQL.  
+Learning REST API + auth + JWT + GORM.
+
+---
+
+## Fitur
+
+- Register user (hash password)
+- Login using JWT
+- CRUD todo (Create, Get, Toggle, Soft Delete)
+- Middleware JWT protected routes
+- Soft delete & relational database (user ↔ todos)
+
+---
+
+## Tech Stack
+
+- [Golang](https://go.dev/)
+- [Gin Gonic](https://gin-gonic.com/)
+- [GORM](https://gorm.io/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Railway](https://railway.app/) (for deployment)
+
+---
+
+## Local Setup
+
+### 1. Clone project
+
+```bash
+git clone https://github.com/Felix-kuang/todo-golang-api.git
+cd todo-golang-api
+```
+
+### 2. Setup .env
+
+```bash
+DATABASE_URL=postgres://postgres:yourpassword@host:port/database_name?sslmode=disable
+JWT_SECRET=your_jwt_secret
+```
+
+### 3. Run Project
+
+```bash
+go run main.go
+```
+
+## API Endpoints
+
+### Auth
+
+| Method | Endpoint         | Description   |
+| ------ | ---------------- | ------------- |
+| POST   | `/auth/register` | Register user |
+| POST   | `/auth/login`    | Login user    |
+
+### Todos (JWT Required)
+
+| Method | Endpoint     | Description              |
+| ------ | ------------ | ------------------------ |
+| GET    | `/todos/`    | Register user            |
+| POST   | `/todos/`    | Create new Todo          |
+| PATCH  | `/todos/:id` | Toggle Todo(done/undone) |
+| DELETE | `/todos/:id` | Soft delete todo         |
+
+## Credits
+Project By [Felix](https://github.com/Felix-kuang)  
+For learning purpose
