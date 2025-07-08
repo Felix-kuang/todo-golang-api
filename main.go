@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"os"
 
 	"github.com/Felix-kuang/todo-golang-api/db"
@@ -16,15 +16,12 @@ import (
 )
 
 func init() {
-	if os.Getenv("RAILWAY_ENVIRONMENT_ID") == "" {
-		godotenv.Load()
-	} else {
+	if os.Getenv("RAILWAY_STATIC_URL") == "" {
 		err := godotenv.Load()
 		if err != nil {
-			log.Fatal("Error loading .env file")
+			fmt.Println("Local .env not found, but that's OK in production.")
 		}
 	}
-
 }
 
 func main() {
