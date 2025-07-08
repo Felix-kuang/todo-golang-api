@@ -1,8 +1,6 @@
 package auth
 
 import (
-	"fmt"
-
 	"github.com/Felix-kuang/todo-golang-api/db"
 	"github.com/Felix-kuang/todo-golang-api/models"
 	"github.com/Felix-kuang/todo-golang-api/utils"
@@ -11,6 +9,16 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Login godoc
+// @Summary Login User
+// @Description Register by username & password
+// @Tags Auth
+// @Accept  json
+// @Produce  json
+// @Param   input  body  models.SwaggerLoginInput true  "User credentials"
+// @Success 200 {object} models.SwaggerSuccessLoginResponse
+// @Failure 400 {object} models.SwaggerErrorResponse
+// @Router /auth/login [post]
 func Login(c *gin.Context) {
 	//cek input
 	var input struct {
@@ -37,7 +45,6 @@ func Login(c *gin.Context) {
 	}
 
 	token, err := utils.GenerateJWT(user.ID)
-	fmt.Println("Token dan error", token, err)
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to generate token", "message": err})
 		return

@@ -6,6 +6,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// DeleteTodo godoc
+// @Summary Delete a new todo entry
+// @Description Soft delete a todo (auth required)
+// @Tags Todos
+// @Accept  json
+// @Produce  json
+// @Param id path int true "Todo ID"
+// @Success 200 {object} models.SwaggerSuccessResponse
+// @Failure 400 {object} models.SwaggerErrorResponse
+// @Security BearerAuth
+// @Router /todos/{id} [delete]
 func DeleteTodo(c *gin.Context) {
 	id := c.Param("id")
 	userID := c.MustGet("user_id").(uint)

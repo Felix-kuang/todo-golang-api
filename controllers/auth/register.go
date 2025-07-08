@@ -8,6 +8,16 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Register godoc
+// @Summary Register a new user
+// @Description Register by username & password
+// @Tags Auth
+// @Accept  json
+// @Produce  json
+// @Param   input  body  models.SwaggerRegisterInput true  "User credentials"
+// @Success 200 {object} models.SwaggerSuccessRegisterResponse
+// @Failure 400 {object} models.SwaggerErrorResponse
+// @Router /auth/register [post]
 func Register(c *gin.Context) {
 	var input struct {
 		Username        string `json:"username"`

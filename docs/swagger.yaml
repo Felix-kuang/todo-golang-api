@@ -1,0 +1,248 @@
+definitions:
+  models.SwaggerErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  models.SwaggerGetTodosResponse:
+    properties:
+      message:
+        type: string
+      todo:
+        items:
+          $ref: '#/definitions/models.SwaggerTodo'
+        type: array
+    type: object
+  models.SwaggerLoginInput:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.SwaggerRegisterInput:
+    properties:
+      confirm_password:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.SwaggerSuccessLoginResponse:
+    properties:
+      message:
+        type: string
+      token:
+        type: string
+    type: object
+  models.SwaggerSuccessRegisterResponse:
+    properties:
+      message:
+        type: string
+      user:
+        $ref: '#/definitions/models.SwaggerUserRegister'
+    type: object
+  models.SwaggerSuccessResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  models.SwaggerTodo:
+    properties:
+      created_at:
+        type: string
+      done:
+        type: boolean
+      is_deleted:
+        type: boolean
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.SwaggerTodoCreate:
+    properties:
+      title:
+        type: string
+    type: object
+  models.SwaggerTodoCreateResponse:
+    properties:
+      title:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.SwaggerToggleSuccessResponse:
+    properties:
+      message:
+        type: string
+      todo:
+        $ref: '#/definitions/models.SwaggerTodo'
+    type: object
+  models.SwaggerUserRegister:
+    properties:
+      id:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Register by username & password
+      parameters:
+      - description: User credentials
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.SwaggerLoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerSuccessLoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      summary: Login User
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register by username & password
+      parameters:
+      - description: User credentials
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.SwaggerRegisterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerSuccessRegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      summary: Register a new user
+      tags:
+      - Auth
+  /todos/:
+    get:
+      consumes:
+      - application/json
+      description: Returns all todos (auth required)
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerGetTodosResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Retrieve todos
+      tags:
+      - Todos
+    post:
+      consumes:
+      - application/json
+      description: Creates a todo (auth required)
+      parameters:
+      - description: Todo data
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.SwaggerTodoCreate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerTodoCreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create a new todo entry
+      tags:
+      - Todos
+  /todos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Soft delete a todo (auth required)
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete a new todo entry
+      tags:
+      - Todos
+    patch:
+      consumes:
+      - application/json
+      description: Toggle a todo to done/undone (auth required)
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SwaggerToggleSuccessResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.SwaggerErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Toggles a new todo entry
+      tags:
+      - Todos
+swagger: "2.0"

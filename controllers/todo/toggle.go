@@ -6,6 +6,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// ToggleTodo godoc
+// @Summary Toggles a new todo entry
+// @Description Toggle a todo to done/undone (auth required)
+// @Tags Todos
+// @Accept  json
+// @Produce  json
+// @Param id path int true "Todo ID"
+// @Success 200 {object} models.SwaggerToggleSuccessResponse
+// @Failure 400 {object} models.SwaggerErrorResponse
+// @Security BearerAuth
+// @Router /todos/{id} [patch]
 func ToggleTodo(c *gin.Context) {
 	id := c.Param("id")
 	var todo models.Todo

@@ -6,6 +6,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CreateTodo godoc
+// @Summary Create a new todo entry
+// @Description Creates a todo (auth required)
+// @Tags Todos
+// @Accept  json
+// @Produce  json
+// @Param   input  body  models.SwaggerTodoCreate true  "Todo data"
+// @Success 200 {object} models.SwaggerTodoCreateResponse
+// @Failure 400 {object} models.SwaggerErrorResponse
+// @Security BearerAuth
+// @Router /todos/ [post]
 func CreateTodo(c *gin.Context) {
 	userID, exists := c.Get("user_id")
 	if !exists {

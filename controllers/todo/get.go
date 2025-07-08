@@ -6,6 +6,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// GetTodo godoc
+// @Summary Retrieve todos
+// @Description Returns all todos (auth required)
+// @Tags Todos
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} models.SwaggerGetTodosResponse
+// @Failure 400 {object} models.SwaggerErrorResponse
+// @Security BearerAuth
+// @Router /todos/ [get]
 func GetTodo(c *gin.Context) {
 	userID, exists := c.Get("user_id")
 
