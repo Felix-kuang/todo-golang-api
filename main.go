@@ -13,12 +13,12 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-func init() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-}
+// func init() {
+// 	err := godotenv.Load()
+// 	if err != nil {
+// 		log.Fatal("Error loading .env file")
+// 	}
+// }
 
 func main() {
 	db.Connect()
