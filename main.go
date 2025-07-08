@@ -5,8 +5,6 @@ import (
 	"github.com/Felix-kuang/todo-golang-api/routes"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
-	"log"
 
 	_ "github.com/Felix-kuang/todo-golang-api/docs"
 	swaggerFiles "github.com/swaggo/files"
